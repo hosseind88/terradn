@@ -3,7 +3,6 @@ use std::fmt;
 use std::io::Read;
 use std::sync::mpsc;
 use std::time::Duration;
-use std::cmp::Ordering;
 
 use failure::{format_err, Fallible};
 use reqwest::blocking::{Client, Request};
