@@ -1,15 +1,15 @@
-## terra
+## terradn
 
 A downloader written in Rust.
 ## usage
 
 ```
-terra 0.1.0
+terradn 0.1.0
 Hossein Dindar <hosseind2017@gmail.com>
 A file downloader in rust
 
 USAGE:
-    terra [FLAGS] [OPTIONS] <URL>
+    terradn [FLAGS] [OPTIONS] <URL>
 
 FLAGS:
     -c, --continue        resume getting a partially-downloaded file
@@ -20,7 +20,7 @@ FLAGS:
     -V, --version         Prints version information
 
 OPTIONS:
-    -U, --useragent <AGENT>                    identify as AGENT instead of terra/VERSION
+    -U, --useragent <AGENT>                    identify as AGENT instead of terradn/VERSION
     -O, --output <FILE>                        write documents to FILE
     -n, --num_connections <NUM_CONNECTIONS>    maximum number of concurrent connections (default is 8)
     -T, --timeout <SECONDS>                    set all timeout values to SECONDS
@@ -35,7 +35,7 @@ ARGS:
 Via cargo
 
 ```
-cargo install terra
+cargo install terradn
 ```
 
 ## screenshot

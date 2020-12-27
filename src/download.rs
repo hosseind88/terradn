@@ -171,7 +171,7 @@ pub fn http_download(url: Url, args: &ArgMatches, version: &str) -> Fallible<()>
     let concurrent_download = !args.is_present("singlethread");
     let user_agent = args
         .value_of("AGENT")
-        .unwrap_or(&format!("terra/{}", version))
+        .unwrap_or(&format!("terradn/{}", version))
         .to_owned();
     let timeout = if let Some(secs) = args.value_of("SECONDS") {
         secs.parse::<u64>()?
