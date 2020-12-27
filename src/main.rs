@@ -18,7 +18,7 @@ fn main() {
 fn run() -> Fallible<()> {
     let args = clap_app!(terra =>
     (author: "Hossein Dindar <hosseind2017@gmail.com>")
-    (about: "A file downloader in rust")
+    (about: "A downloader written in Rust.")
     (@arg quiet: -q --quiet "quiet (no output)")
     (@arg continue: -c --continue "resume getting a partially-downloaded file")
     (@arg singlethread: -s --singlethread "download using only a single thread")

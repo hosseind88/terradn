@@ -3,6 +3,8 @@ name = "terra"
 version = "0.1.0"
 authors = ["hosseind88 <hosseind88@mail.ru>"]
 edition = "2018"
+description = "A downloader written in Rust."
+license = "MIT"
 
 [dependencies]
 indicatif = "0.15.0"
