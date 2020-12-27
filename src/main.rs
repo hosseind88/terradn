@@ -1,8 +1,8 @@
 use std::process;
 
 use clap::{clap_app, crate_version};
-use uma::download::{ftp_download, http_download};
-use uma::utils;
+use luna::download::{ftp_download, http_download};
+use luna::utils;
 use failure::{format_err, Fallible};
 
 fn main() {
@@ -16,7 +16,7 @@ fn main() {
 }
 
 fn run() -> Fallible<()> {
-    let args = clap_app!(uma =>
+    let args = clap_app!(luna =>
     (author: "Hossein Dindar <hosseind2017@gmail.com>")
     (about: "A file downloader in rust")
     (@arg quiet: -q --quiet "quiet (no output)")
@@ -24,7 +24,7 @@ fn run() -> Fallible<()> {
     (@arg singlethread: -s --singlethread "download using only a single thread")
     (@arg headers: -H --headers "prints the headers sent by the HTTP server")
     (@arg FILE: -O --output +takes_value "write documents to FILE")
-    (@arg AGENT: -U --useragent +takes_value "identify as AGENT instead of uma/VERSION")
+    (@arg AGENT: -U --useragent +takes_value "identify as AGENT instead of luna/VERSION")
     (@arg SECONDS: -T --timeout +takes_value "set all timeout values to SECONDS")
     (@arg NUM_CONNECTIONS: -n --num_connections +takes_value "maximum number of concurrent connections (default is 8)")
     (@arg URL: +required +takes_value "url to download")

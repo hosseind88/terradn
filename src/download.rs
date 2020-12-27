@@ -6,7 +6,7 @@ use std::time::Duration;
 use clap::ArgMatches;
 use console::style;
 use failure::{format_err, Fallible};
-use indicatif::{HumanBytes, ProgressBar, ProgressStyle};
+use indicatif::{HlunanBytes, ProgressBar, ProgressStyle};
 use reqwest::blocking::Client;
 use reqwest::header::{self, HeaderMap, HeaderValue};
 
@@ -193,7 +193,7 @@ pub fn http_download(url: Url, args: &ArgMatches, version: &str) -> Fallible<()>
     let concurrent_download = !args.is_present("singlethread");
     let user_agent = args
         .value_of("AGENT")
-        .unwrap_or(&format!("uma/{}", version))
+        .unwrap_or(&format!("luna/{}", version))
         .to_owned();
     let timeout = if let Some(secs) = args.value_of("SECONDS") {
         secs.parse::<u64>()?
@@ -304,9 +304,9 @@ impl DefaultEventsHandler {
         };
         if let Some(len) = length {
             let exact = style(len).green();
-            let human_readable = style(format!("{}", HumanBytes(len))).red();
+            let hlunan_readable = style(format!("{}", HlunanBytes(len))).red();
 
-            println!("Length: {} ({})", exact, human_readable);
+            println!("Length: {} ({})", exact, hlunan_readable);
         } else {
             println!("Length: {}", style("unknown").red());
         }
