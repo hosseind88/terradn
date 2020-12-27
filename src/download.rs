@@ -6,15 +6,37 @@ use std::time::Duration;
 use clap::ArgMatches;
 use console::style;
 use failure::{format_err, Fallible};
-use indicatif::{HumanBytes, ProgressBar};
+use indicatif::{HumanBytes, ProgressBar, ProgressStyle};
 use reqwest::blocking::Client;
 use reqwest::header::{self, HeaderMap, HeaderValue};
 
 use url::Url;
 
-use crate::bar::create_progress_bar;
 use crate::core::{Config, EventsHandler, FtpDownload, HttpDownload};
 use crate::utils::{decode_percent_encoded_data, get_file_handle};
+
+static PBAR_FMT: &'static str =
+    "{msg} {spinner:.purple} {percent}% [{wide_bar:.cyan/white}] {bytes}/{total_bytes} eta: {eta}";
+
+pub fn create_progress_bar(msg: &str, length: Option<u64>) -> ProgressBar {
+    let progbar = match length {
+        Some(len) => ProgressBar::new(len),
+        None => ProgressBar::new_spinner(),
+    };
+
+    progbar.set_message(msg);
+    if length.is_some() {
+        progbar.set_style(
+            ProgressStyle::default_bar()
+                .template(PBAR_FMT)
+                .progress_chars("=> "),
+        );
+    } else {
+        progbar.set_style(ProgressStyle::default_spinner());
+    }
+
+    progbar
+}
 
 fn request_headers_from_server(url: &Url, timeout: u64, ua: &str) -> Fallible<HeaderMap> {
     let resp = Client::new()
@@ -31,7 +53,7 @@ fn print_headers(headers: HeaderMap) {
         println!(
             "{}: {}",
             style(hdr.as_str()).red(),
-            style(val.to_str().unwrap_or("<..>")).green()
+            style(val.to_str().unwrap_or("<..>")).white()
         );
     }
 }
@@ -171,7 +193,7 @@ pub fn http_download(url: Url, args: &ArgMatches, version: &str) -> Fallible<()>
     let concurrent_download = !args.is_present("singlethread");
     let user_agent = args
         .value_of("AGENT")
-        .unwrap_or(&format!("downloader_cli/{}", version))
+        .unwrap_or(&format!("uma/{}", version))
         .to_owned();
     let timeout = if let Some(secs) = args.value_of("SECONDS") {
         secs.parse::<u64>()?
@@ -309,7 +331,7 @@ impl EventsHandler for DefaultEventsHandler {
         };
         println!("Type: {}", style(ct_type).green());
 
-        println!("Saving to: {}", style(&self.fname).green());
+        println!("Saving to: {}", style(&self.fname).magenta());
         if let Some(val) = headers.get(header::CONTENT_LENGTH) {
             self.create_prog_bar(val.to_str().unwrap_or("").parse::<u64>().ok());
         } else {

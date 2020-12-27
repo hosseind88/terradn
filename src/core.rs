@@ -3,15 +3,11 @@ use std::fmt;
 use std::io::Read;
 use std::sync::mpsc;
 use std::time::Duration;
-use std::cmp::Ordering;
-
 use failure::{format_err, Fallible};
 use reqwest::blocking::{Client, Request};
 use reqwest::header::{self, HeaderMap, HeaderValue};
 use url::Url;
-
 use threadpool::ThreadPool;
-
 use ftp::FtpStream;
 
 #[derive(Debug, Clone)]
