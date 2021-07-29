@@ -1,10 +1,12 @@
 [package]
 name = "terradn"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["hosseind88 <hosseind88@mail.ru>"]
 edition = "2018"
 description = "A downloader written in Rust."
 license = "MIT"
+readme = "README.md"
+repository = "https://github.com/hosseind88/terradn"
 
 [dependencies]
 indicatif = "0.15.0"
